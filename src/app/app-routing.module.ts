@@ -1,36 +1,25 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {LoginComponent} from "./auth/login/login.component";
 import {RegisterComponent} from "./auth/register/register.component";
-import {ProgressComponent} from "./pages/progress/progress.component";
-import {ChartComponent} from "./pages/chart/chart.component";
-import {NpPageFoundComponent} from "./pages/np-page-found/np-page-found.component";
-import {MainComponent} from "./pages/main.component";
+import {NoPageFoundComponent} from "./no-page-found/no-page-found.component";
+import {PagesRoutingModule} from "./pages/pages-routing.module";
+import {AuthRoutingModule} from "./auth/auth-routing.module";
 
 const routes: Routes = [
-  {
-    path: '', component: MainComponent,
-    children: [
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'progress', component: ProgressComponent},
-      {path: 'chart', component: ChartComponent},
-      // Full example localhost:4200 or localhost:4200/
-      {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-    ]
-  },
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
+  // Full example localhost:4200 or localhost:4200/
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   // Route for any other route
-  {path: '**', component: NpPageFoundComponent}
+  {path: '**', component: NoPageFoundComponent}
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AuthRoutingModule,
+    PagesRoutingModule
   ],
   exports: [
     RouterModule,

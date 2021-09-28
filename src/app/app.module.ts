@@ -1,38 +1,30 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import {AppRoutingModule} from "./app-routing.module";
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { NpPageFoundComponent } from './pages/np-page-found/np-page-found.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { ProgressComponent } from './pages/progress/progress.component';
-import { ChartComponent } from './pages/chart/chart.component';
-import { MainComponent } from './pages/main.component';
+import {AppRoutingModule} from "./app-routing.module";
+import {PagesModule} from "./pages/pages.module";
+import {SharedModule} from "./shared/shared.module";
+import {AuthModule} from "./auth/auth.module";
+
+import {AppComponent} from './app.component';
+import {MainComponent} from './pages/main.component';
+import {NoPageFoundComponent} from "./no-page-found/no-page-found.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    NpPageFoundComponent,
-    DashboardComponent,
-    BreadcrumbsComponent,
-    SidebarComponent,
-    HeaderComponent,
-    ProgressComponent,
-    ChartComponent,
-    MainComponent
+    MainComponent,
+    NoPageFoundComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PagesModule,
+    SharedModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
