@@ -1,1 +1,23 @@
-<p>chart works!</p>
+<div class="row">
+  <div class="col-6">
+   <app-donut title="Sales" [labels]="labelsSalesChart" [data]="data">
+   </app-donut>
+  </div>
+
+  <div class="col-6">
+    <app-donut title="Time" [labels]="labelsTimeChart" [data]="data">
+    </app-donut>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-6">
+    <app-donut title="Range" [labels]="labelsRangeChart" [data]="data">
+    </app-donut>
+  </div>
+  <div class="col-6">
+    <app-donut title="Bit" [labels]="labelsAChart" [data]="data">
+    </app-donut>
+  </div>
+</div>

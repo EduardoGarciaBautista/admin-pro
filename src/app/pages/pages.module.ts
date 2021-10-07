@@ -6,7 +6,6 @@ import {ProgressComponent} from "./progress/progress.component";
 import {FormsModule} from "@angular/forms";
 import {ComponentsModule} from "../components/components.module";
 
-
 @NgModule({
   declarations: [
     ChartComponent,
@@ -16,7 +15,7 @@ import {ComponentsModule} from "../components/components.module";
   imports: [
     CommonModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   exports: [
     ChartComponent,
