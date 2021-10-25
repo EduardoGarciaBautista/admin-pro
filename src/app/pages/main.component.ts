@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SettingsService} from "../services/settings.service";
 
+// @ts-ignore
 declare function customFunction();
 
 @Component({
@@ -14,7 +15,7 @@ export class MainComponent implements OnInit {
   constructor(private settingsService: SettingsService) { }
 
   ngOnInit(): void {
-    customFunction();
+    // customFunction();
   }
 
 

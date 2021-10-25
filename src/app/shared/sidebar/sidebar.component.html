@@ -29,7 +29,14 @@
             </span>
           </a>
           <ul aria-expanded="false" class="collapse" *ngFor="let option of menuItem.options">
-            <li><a [routerLink]="option.path">{{option.title}} </a></li>
+            <li>
+              <a
+                [routerLink]="option.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                {{option.title}}
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
