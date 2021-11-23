@@ -1,16 +1,18 @@
-import {NgModule} from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
-import {MainComponent} from "./main.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {ProgressComponent} from "./progress/progress.component";
-import {ChartComponent} from "./chart/chart.component";
-import {AccountSettingsComponent} from "./account-settings/account-settings.component";
-import {PromisesComponent} from "./promises/promises.component";
-import {RxjsComponent} from "./rxjs/rxjs.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {MainComponent} from './main.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {ProgressComponent} from './progress/progress.component';
+import {ChartComponent} from './chart/chart.component';
+import {AccountSettingsComponent} from './account-settings/account-settings.component';
+import {PromisesComponent} from './promises/promises.component';
+import {RxjsComponent} from './rxjs/rxjs.component';
+import {AuthGuard} from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'dashboard', component: MainComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '', component: DashboardComponent, data: {

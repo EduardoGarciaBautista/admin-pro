@@ -10,3 +10,13 @@
 #themecolors .selector {
   cursor: pointer;
 }
+#googleBtn {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cursor {
+  cursor: pointer;
+}
