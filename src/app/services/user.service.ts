@@ -6,6 +6,7 @@ import {LoginFormInterface} from '../interfaces/login-form.interface';
 import {catchError, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {Router} from '@angular/router';
+import {UserModel} from "../models/user.model";
 
 declare const gapi: any;
 
@@ -19,11 +20,18 @@ export class UserService {
   private readonly LOGIN_GOOGLE = 'login/google';
   private readonly RENEW_TOKEN = 'login/renew';
   public auth2: any;
+  public user: Partial<UserModel> | null = null;
 
   constructor(private http: HttpClient,
               private router: Router,
               private ngzone: NgZone) {
     this.googleInit();
+  }
+  public get getUser(): Partial<UserModel> | null {
+    return this.user;
+  }
+  public set setUser(user: Partial<UserModel>) {
+    this.user = user;
   }
 
   validateToken() {
@@ -34,10 +42,11 @@ export class UserService {
         'x-token': token
       }
     }).pipe(
-      tap((response: any) => {
+      map((response: any) => {
+        this.user = response.user as Partial<UserModel>;
         localStorage.setItem('token', response.token);
+        return true;
       }),
-      map(response => true),
       catchError(() => {
         return of(false)
       })
@@ -74,7 +83,7 @@ export class UserService {
   public logOut() {
     localStorage.removeItem('token');
     const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then( () => {
+    auth2.signOut().then(() => {
       this.ngzone.run(() => {
         this.router.navigate(['/login']);
       });
@@ -91,5 +100,37 @@ export class UserService {
         resolve(true);
       });
     });
+  }
+
+  public get getUrl() {
+    if (this.user?.img) {
+      if (this.user?.img.includes('https')) {
+        return this.user?.img;
+      }
+      return `${environment.HOST_URL}upload/users/${this.user?.img}`;
+    } else {
+      return `${environment.HOST_URL}upload/users/no-image`;
+    }
+  }
+
+
+  updateProfile(user: Partial<UserModel>) {
+    const url = `${environment.HOST_URL}${this.USERS_SERVICE}/${this.user?.uid || ''}`;
+    const data: Partial<UserModel> = {
+      ...user,
+      role: this.user?.role
+    }
+    return this.http.put(url, data, {
+      headers: {
+        'x-token': localStorage.getItem('token') || ''
+      }
+    }).pipe(
+      map((r: any) => {
+        if (r.ok) {
+          this.user = r.updatedUser;
+        }
+        return r;
+      })
+    );
   }
 }

@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">My profile</h4>
+        <h6 class="card-subtitle">Setting</h6>
+        <form class="form p-t-20" [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+          <div class="form-group">
+            <label for="exampleInputuname">User Name</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-user"></i></div>
+              <input type="text" class="form-control" id="exampleInputuname" placeholder="Username" formControlName="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-email"></i></div>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" formControlName="email"
+                     [readOnly]="uService?.getUser?.google">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10 btn-block" [disabled]="profileForm.invalid">
+            <i class="fa fa-save"></i>
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Avatar</h4>
+        <h6 class="card-subtitle">User image</h6>
+
+        <div class="text-center">
+          <img *ngIf="!tempImage" [src]="uService?.getUrl" alt="" class="img-avatar">
+          <img *ngIf="tempImage" [src]="tempImage" alt="" class="img-avatar">
+        </div>
+
+        <input type="file" (change)="updateImage($event)">
+        <button type="button" class="btn btn-success waves-effect waves-light m-r-10 btn-block" [disabled]="!image" (click)="uploadFile()">
+          <i class="fa fa-save"></i>
+          Change image
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
